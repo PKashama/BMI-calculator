@@ -1,0 +1,45 @@
+from tkinter import *
+
+
+def calculate_bmi():
+    try:
+        weight = float(weight_entry.get())
+
+
+        height = float(height_entry.get()) / 100
+        bmi = weight / (height ** 2)
+
+        result = f"BMI: {bmi:.2f} - "
+        if bmi < 18.5:
+            result += "Ondergewicht"
+        elif bmi < 24.9:
+            result += "Normaal gewicht"
+        elif bmi < 29.9:
+            result += "Overgewicht"
+        else:
+            result += "Obesitas"
+
+        result_label.config(text=result)
+    except ValueError:
+        result_label.config(text="Voer geldige getallen in.")
+
+# Tkinter setup
+root = Tk()
+root.title("BMI Calculator")
+
+# Invoer voor gewicht en lengte
+Label(root, text="Gewicht (kg):").pack()
+weight_entry = Entry(root)
+weight_entry.pack()
+
+Label(root, text="Lengte (cm):").pack()
+height_entry = Entry(root)
+height_entry.pack()
+
+# Resultaat label en knop
+result_label = Label(root, text="")
+result_label.pack(pady=10)
+
+Button(root, text="Bereken BMI", command=calculate_bmi).pack()
+
+root.mainloop()
